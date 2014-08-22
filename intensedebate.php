@@ -543,11 +543,15 @@ Author URI: http://intensedebate.com
 		
 		// makes an array out of whatever is passed in
 		function scrubInputHash( $o ) {
-			$incomingProps = $o;
-			if ( !is_array( $o ) ) {
-				$incomingProps = get_object_vars( $o );
-			}
-			return $incomingProps;
+            if (is_array($o)) {
+                return $o;
+            }
+
+            if (is_object($o)) {
+                return get_object_vars($o);
+            }
+
+			return array();
 		}
 
 		function loadFromRemoteJson( $jsonString ) {
